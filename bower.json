@@ -1,0 +1,32 @@
+{
+  "name": "corsRequest",
+  "version": "0.0.1",
+  "authors": [
+    "Tiago Quelhas <tiagoq@gmail.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tjgq/cors-request.git"
+  },
+  "description": "A minimal, dependency-free, cross-browser CORS HTTP client",
+  "main": "corsRequest.js",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "HTTP",
+    "CORS",
+    "XMLHttpRequest",
+    "XDomainRequest"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
