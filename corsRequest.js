@@ -107,11 +107,6 @@
 
     this.req.open(this.method, this.url);
 
-    this.req.ontimeout = function() {
-      self.err = error('timeout');
-      done(self.err);
-    };
-
     this.req.onerror = function() {
       self.err = error('error');
       done(self.err);
@@ -138,9 +133,10 @@
       done(self.err, self.res);
     };
 
-    // Setting this handler seems to increase the probability
+    // Setting all handlers seems to increase the probability
     // of the request being sucessful on old IE versions.
     if (useXdr) {
+      this.req.ontimeout = noop;
       this.req.onprogress = noop;
     }
 
@@ -163,6 +159,15 @@
         self.req.send(payload || null);
       }
     }, 0);
+
+    // Perform our own timeout logic instead of relying on
+    // the underlying implementation.
+    setTimeout(function() {
+      if (self.err === void 0) {
+        self.err = error('timeout');
+        done(self.err);
+      }
+    }, corsRequest.timeout);
   }
 
 
@@ -201,6 +206,10 @@
 
     return new CorsRequest(method, url, data, done || noop);
   }
+
+
+  // Default timeout value.
+  corsRequest.timeout = 10000;
 
 
   // Report implementation in use.
