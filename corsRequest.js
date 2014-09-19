@@ -81,9 +81,9 @@
   // Encode data to JSON representation or string, according to its type.
   function encode(data) {
     if (isObject(data)) {
-      return toJSON(data);
+      return { data: toJSON(data), contentType: 'application/json' };
     } else {
-      return data.toString();
+      return { data: data.toString(), contentType: 'text/plain' };
     }
   }
 
@@ -149,7 +149,11 @@
     };
 
     if (this.data !== void 0) {
-      var payload = encode(data);
+      encoded = encode(data)
+      var payload = encoded.data;
+      if(this.req.setRequestHeader) {
+        this.req.setRequestHeader('Content-Type', encoded.contentType);
+      }
     }
 
     // Calling send() right away sometimes causes the request
