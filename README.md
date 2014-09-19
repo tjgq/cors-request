@@ -19,3 +19,8 @@ If supplied, the *done* callback must have signature (err, res). The request is 
  * *res.json*: the response body parsed as JSON, if it is valid JSON.
 
 All functions return an object with properties *method*, *url*, *data* and *req* (the underlying request object). Properties *err* and *res* are set when the request completes. Call *abort()* on the object to abort the request.
+
+
+## Content-Type ##
+
+Using XDomainRequest it is not possible to set the request's `Content-Type` header. If using express, [express-ie-cors](https://github.com/advanced/express-ie-cors) provides a workaround.
