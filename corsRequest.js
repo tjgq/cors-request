@@ -32,10 +32,10 @@
 
   // Return a function that only calls fn once.
   function once(fn) {
-    fn.called = false;
+    var called = false;
     return function() {
-      if (!fn.called) {
-        fn.called = true;
+      if (!called) {
+        called = true;
         return fn.apply(null, arguments);
       }
     };
