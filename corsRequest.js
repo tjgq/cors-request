@@ -4,7 +4,7 @@
     module.exports = factory();
   } else if (typeof define === 'function' && define.amd) {
     // AMD
-    define(['corsRequest'], function() {
+    define(function() {
       return (root.corsRequest = factory());
     });
   } else {
